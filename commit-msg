@@ -1,0 +1,25 @@
+#!/bin/sh
+# Hook created by Jaqueline Kirino
+# Automatically adds branch name and branch description to every commit message.
+#   Version: 1.1
+# Branch pattern feature/ABC-123 - where ABC-123 is the task number
+
+NAME=$(git branch | grep '*' | sed 's/* //') 
+NAMEREMOVED="${NAME%%/*}"            # remove all text after / and store in variable NAMEREMOVED
+POSITION="$(( ${#NAMEREMOVED} + 1 ))"  # get string length of $NAMEREMOVED + 1
+NAME=${NAME:POSITION}
+
+echo "$NAME"': '$(cat "$1") > "$1"
+
+if [ -z "$NAME" ] # if name has value
+then
+  DESCRIPTION=$(git config branch.["$NAMEREMOVED"].description)
+else
+  DESCRIPTION=$(git config branch.["$NAME"].description)
+fi
+
+if [ -n "$DESCRIPTION" ] 
+then
+   echo "" >> "$1"
+   echo $DESCRIPTION >> "$1"
+fi 
