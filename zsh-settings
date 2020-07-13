@@ -1,0 +1,62 @@
+
+Verificar se tem zsh
+zsh --version
+
+instalar oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+Instalar o tema drácula
+Mac:
+https://draculatheme.com/terminal/
+
+Linux, com GNOME: https://github.com/dracula/gnome-terminal
+
+Fira code, baixar zip:
+https://github.com/tonsky/FiraCode/releases
+
+Descompactar e copiar os arquivos da pasta TTF para as fontes do sistema
+
+MacOS: Duplo clique no arquivo TTF, e instalar fonte.
+
+Nas preferencias do terminal, aba Texto, em Fonte, clique em Trocar.
+Busque por Fira code, normal ou Retina e escolha um tamanho de fonte (13)
+
+Tema Spaceship:
+
+Clonar para a pasta do ZSH
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+
+criar um link simbólico para o arquivo do tema do Spaceship na pasta dos temas do Oh My Zsh
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
+alterar aquivo .zshrc
+
+vi ~/.zshrc
+
+ZSH_THEME="spaceship"
+
+no fim do arquivo 
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+SPACESHIP_USER_SHOW=always
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="❯"
+SPACESHIP_CHAR_SUFFIX=" "
+
+Plugins zsh
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
+
