@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Hook created by Jaqueline Kirino
 # Automatically adds branch name and branch description to every commit message.
 #   Version: 2.0
@@ -12,8 +14,10 @@ if [[ $FILE_CONTENT =~ $REGEX ]]; then
 fi
 
 ORIGBRANCH="$(git rev-parse --abbrev-ref HEAD)"
-BRANCHREMOVED="${ORIGBRANCH%%/*}"            # remove all text after / and store in variable BRANCHREMOVED
-POSITION="$(( ${#BRANCHREMOVED} + 1 ))"  # get string length of $BRANCHREMOVED + 1
+# Line below will be used when branch pattern is feature/ABC-123
+# BRANCHREMOVED="${ORIGBRANCH%%/*}"            # remove all text after / and store in variable BRANCHREMOVED
+# change also variable name to branchremoved
+POSITION="$(( ${#ORIGBRANCH} + 1 ))"  # get string length of $BRANCHREMOVED + 1
 BRANCH=${ORIGBRANCH:POSITION}
 
 if [[ ! $BRANCH ]]; then
